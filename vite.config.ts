@@ -16,12 +16,12 @@ export default defineConfig((configEnv) => ({
       linters: [new EsLinter({ configEnv })],
     }),
     dts({
-      include: ['src/component/'],
+      include: ['src/components/'],
     }),
   ],
   build: {
     lib: {
-      entry: resolve('src', 'component/index.ts'),
+      entry: resolve('src', 'components/index.ts'),
       name: 'ReactViteLibrary',
       formats: ['es', 'umd'],
       fileName: (format) => `easy-packager.${format}.js`,
