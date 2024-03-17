@@ -6,35 +6,29 @@ function App() {
     {
       title: 'Name',
       value: '',
-      format: () => {
-        return <p>hello</p>
-      },
-      style: {
-        color: 'red',
-      },
       children: [
         {
           title: 'Firstname',
-          value: 'firstname',
-          format: () => {
-            return <p>hello</p>
+          value: '',
+          format: (_: unknown, rowData) => {
+            return rowData.firstname
+          },
+          headStyle: {
+            color: '',
+          },
+          cellStyle: {
+            color: '',
           },
         },
         {
           title: 'Lastname',
           value: 'lastname',
-          format: () => {
-            return <p>hello</p>
-          },
         },
       ],
     },
     {
       title: 'Location',
       value: '',
-      format: () => {
-        return <p>hello</p>
-      },
       children: [
         {
           title: 'City',
@@ -44,53 +38,58 @@ function App() {
           title: 'State',
           value: 'location.separate.state',
         },
-        {
-          title: 'State',
-          value: 'location.separate.state',
-        },
-        {
-          title: 'State',
-          value: 'location.separate.state',
-        },
-      ],
-    },
-    {
-      title: 'Age',
-      value: 'age',
-      format: () => {
-        return <p>hello</p>
-      },
-      children: [
-        {
-          title: 'Day',
-          value: 'age.day',
-          format: () => {
-            return <p>hello</p>
-          },
-        },
-        {
-          title: 'Month',
-          value: 'age.month',
-          format: () => {
-            return <p>hello</p>
-          },
-        },
-        {
-          title: 'Year',
-          value: 'age.year',
-          format: () => {
-            return <p>hello</p>
-          },
-        },
       ],
     },
     {
       title: 'Parent Name',
       value: 'parent_name',
     },
+    {
+      title: 'Daughter Name',
+      value: 'daughter',
+    },
+    {
+      title: 'Age',
+      value: 'age',
+      children: [
+        {
+          title: 'Day',
+          value: 'age.day',
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          format(value, _, __) {
+            return value
+          },
+        },
+        {
+          title: 'Month',
+          value: 'age.month',
+        },
+        {
+          title: 'Year',
+          value: 'age.year',
+        },
+      ],
+    },
   ]
 
   const colData = [
+    {
+      firstname: 'Piyush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '05',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
     {
       firstname: 'Ayush',
       lastname: 'Papnai',
@@ -108,16 +107,231 @@ function App() {
       },
       parent_name: 'Ramesh',
     },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+      daughter: 'dhvani',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
+    {
+      firstname: 'Ayush',
+      lastname: 'Papnai',
+      age: {
+        day: '26',
+        month: '15',
+        year: '1997',
+      },
+      location: {
+        separate: {
+          state: 'Maharashtra',
+          city: 'Pune',
+        },
+        address: 'Pune,Maharashtra',
+      },
+      parent_name: 'Ramesh',
+    },
   ]
 
   return (
-    <div>
+    <div
+      style={{
+        height: '50vh',
+        overflow: 'auto',
+        scrollbarWidth: 'none',
+      }}
+    >
       <Table
         columns={column}
+        rowHeight="20px"
+        isExpandable
         data={colData}
-        border={1}
         draggableCol
-        alternateRowColored="#d6d6d6"
+        border={true}
+        showSerialNumber={true}
+        colorScheme="#d18843"
+        alternateRowColored={true}
       />
     </div>
   )

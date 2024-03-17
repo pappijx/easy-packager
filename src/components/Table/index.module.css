@@ -1,0 +1,19 @@
+.resizebaleDiv {
+  resize: horizontal;
+  overflow: auto;
+  min-width: 100%;
+  max-height: 40px;
+  direction: ltr;
+  left: 0;
+}
+
+.colBorder {
+  border: 1px solid rgb(182, 182, 182);
+  border-right: none;
+  border-left: none;
+  border-top: none;
+}
+
+.row td {
+  color: '#ffffff' !important;
+}
