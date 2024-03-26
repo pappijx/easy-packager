@@ -1,10 +1,12 @@
 .resizebaleDiv {
+  white-space: nowrap;
+  width: 150px;
+  min-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   resize: horizontal;
-  overflow: auto;
-  min-width: 100%;
-  max-height: 40px;
   direction: ltr;
-  left: 0;
+  cursor: pointer;
 }
 
 .colBorder {
