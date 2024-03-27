@@ -14,7 +14,7 @@ export interface IColumn {
   cellStyle?: React.CSSProperties
 }
 export interface ITable {
-  caption?: 'hello'
+  caption?: string
   columns: IColumn[]
   data: any[]
   alternateRowColored?: boolean
@@ -36,7 +36,22 @@ const searchValueInData = (data: any, keyToFind: string[], index = 0) => {
 
   return item
 }
-
+/**
+ *
+ * @param columns {IColumn[]}
+ * @param caption  {string}
+ * @param data {any[]}
+ * @param alternateRowColored {boolean} will make alternate rows coloured
+ * @param draggableCol {boolean} make columns draggable (still being tested)
+ * @param rowHeight {string} in px
+ * @param colorScheme {boolean} hex codes will auto generate row colors
+ * @param isExpandable {boolean} row is expandable with custom expanded Components
+ * @param border {boolean} show borders around table and in tables
+ * @param showSerialNumber {boolean}
+ * @param expandedComponent {React.ReactNode}
+ * @returns Table component
+ *
+ */
 export const Table = ({
   columns,
   caption,
@@ -61,12 +76,6 @@ export const Table = ({
 
   const onDragOver = (e: React.DragEvent<HTMLTableHeaderCellElement>, index: number) => {
     e.preventDefault()
-    setColumnState((prev) => {
-      const finalArray: IColumn[] = [...prev]
-      finalArray[activeIndex] = prev[index]
-      finalArray[index] = {}
-      return finalArray
-    })
     setDraggedOverElement(index)
   }
 
