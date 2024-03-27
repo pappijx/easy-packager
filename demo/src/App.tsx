@@ -208,7 +208,9 @@ function App() {
         columns={column}
         rowHeight="20px"
         isExpandable
-        expandedComponent={<p>Hello</p>}
+        expandedComponent={(item: any) => {
+          return <p>{item?.firstname}</p>
+        }}
         data={colData}
         draggableCol
         border={true}

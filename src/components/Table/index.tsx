@@ -1,6 +1,6 @@
 import '../../index.css'
 
-import React, { useState } from 'react'
+import React, { JSXElementConstructor, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import styles from './index.module.css'
@@ -24,7 +24,7 @@ export interface ITable {
   border?: boolean
   showSerialNumber?: boolean
   colorScheme?: string
-  expandedComponent?: React.ReactNode
+  expandedComponent?: any
 }
 
 const searchValueInData = (data: any, keyToFind: string[], index = 0) => {
@@ -48,7 +48,7 @@ const searchValueInData = (data: any, keyToFind: string[], index = 0) => {
  * @param isExpandable {boolean} row is expandable with custom expanded Components
  * @param border {boolean} show borders around table and in tables
  * @param showSerialNumber {boolean}
- * @param expandedComponent {React.ReactNode}
+ * @param expandedComponent function that gives row as param and returns jsx for expanded element
  * @returns Table component
  *
  */
@@ -267,7 +267,9 @@ export const Table = ({
                     >
                       <span
                         onClick={() =>
-                          expandedRowIndex ? setExpandedRowIndex(null) : setExpandedRowIndex(index)
+                          index === expandedRowIndex
+                            ? setExpandedRowIndex(-1)
+                            : setExpandedRowIndex(index)
                         }
                         style={{ color: colorScheme, cursor: 'pointer' }}
                       >
@@ -289,19 +291,25 @@ export const Table = ({
                   )}
                   <RowRenderer border={border} row={row} columns={columnState} />
                 </tr>
-                {index === expandedRowIndex && (
-                  <tr>
-                    <td
-                      colSpan={200}
-                      style={{
-                        height: '200px',
-                        transition: '1s',
-                      }}
-                    >
-                      {expandedComponent}
-                    </td>
+                {
+                  <tr
+                    style={{
+                      transition: '0.3s',
+                      height: index === expandedRowIndex ? '300px' : '0px',
+                    }}
+                  >
+                    {index === expandedRowIndex && (
+                      <td
+                        colSpan={200}
+                        style={{
+                          transition: '1s',
+                        }}
+                      >
+                        {expandedComponent(row)}
+                      </td>
+                    )}
                   </tr>
-                )}
+                }
               </>
             )
           })}
