@@ -153,9 +153,9 @@ export const Table = ({
                   <th
                     colSpan={column.children?.length}
                     draggable={draggableCol}
-                    onDragStart={(e) => onDragStart(e, index)}
-                    onDragOver={(e) => onDragOver(e, index)}
-                    onDrop={(e) => onDrop(e)}
+                    onDragStart={(e:any) => onDragStart(e, index)}
+                    onDragOver={(e:any) => onDragOver(e, index)}
+                    onDrop={(e:any) => onDrop(e)}
                     style={{
                       padding: '0.5rem',
                       width: '100px',
@@ -328,7 +328,7 @@ const RowRenderer = ({
   columns: IColumn[]
   border?: boolean
 }) => {
-  return columns.map((col, index) =>
+  return <>{columns.map((col, index) =>
     col.children ? (
       <RowRenderer key={col.id} border={border} row={row} columns={col.children} />
     ) : (
@@ -348,5 +348,6 @@ const RowRenderer = ({
           : col.value && searchValueInData(row, col.value?.split('.'))}
       </td>
     ),
-  )
+  )}
+  </>
 }

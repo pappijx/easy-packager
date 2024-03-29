@@ -17,7 +17,7 @@ function App() {
             return rowData.firstname
           },
           headStyle: {
-            color: '',
+            color: 'white',
           },
           cellStyle: {
             color: '',
@@ -209,13 +209,21 @@ function App() {
         rowHeight="20px"
         isExpandable
         expandedComponent={(item: any) => {
-          return <p>{item?.firstname}</p>
+          return <div style={{
+            display: 'flex',
+            width: '100%'
+          }}>
+            <p>{item?.firstname}</p>
+            <p>{item?.parent_name}</p>
+            <p>{item?.location.separate?.city}</p>
+            <p>{item?.location.separate?.state}</p>
+          </div>
         }}
         data={colData}
         draggableCol
         border={true}
         showSerialNumber={true}
-        colorScheme="#ff0000"
+        colorScheme="#004886"
         alternateRowColored={true}
       />
     </div>
