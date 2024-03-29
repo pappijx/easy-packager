@@ -1,2 +1,2 @@
-export type { ITable } from './Table'
+export type { IColumn, ITable } from './Table'
 export { Table } from './Table'

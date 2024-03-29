@@ -1,6 +1,6 @@
 import './App.css'
-import { Table } from '../../src/components'
-import { IColumn } from '../../src/components/Table'
+import { Table } from '../../dist'
+import { IColumn } from '../../dist'
 
 function App() {
   const column: IColumn[] = [
@@ -209,15 +209,19 @@ function App() {
         rowHeight="20px"
         isExpandable
         expandedComponent={(item: any) => {
-          return <div style={{
-            display: 'flex',
-            width: '100%'
-          }}>
-            <p>{item?.firstname}</p>
-            <p>{item?.parent_name}</p>
-            <p>{item?.location.separate?.city}</p>
-            <p>{item?.location.separate?.state}</p>
-          </div>
+          return (
+            <div
+              style={{
+                display: 'flex',
+                width: '100%',
+              }}
+            >
+              <p>{item?.firstname}</p>
+              <p>{item?.parent_name}</p>
+              <p>{item?.location.separate?.city}</p>
+              <p>{item?.location.separate?.state}</p>
+            </div>
+          )
         }}
         data={colData}
         draggableCol

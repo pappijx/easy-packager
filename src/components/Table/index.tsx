@@ -1,6 +1,6 @@
 import '../../index.css'
 
-import React, { JSXElementConstructor, useState } from 'react'
+import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import styles from './index.module.css'
@@ -153,9 +153,9 @@ export const Table = ({
                   <th
                     colSpan={column.children?.length}
                     draggable={draggableCol}
-                    onDragStart={(e:any) => onDragStart(e, index)}
-                    onDragOver={(e:any) => onDragOver(e, index)}
-                    onDrop={(e:any) => onDrop(e)}
+                    onDragStart={(e: any) => onDragStart(e, index)}
+                    onDragOver={(e: any) => onDragOver(e, index)}
+                    onDrop={(e: any) => onDrop(e)}
                     style={{
                       padding: '0.5rem',
                       width: '100px',
@@ -328,26 +328,33 @@ const RowRenderer = ({
   columns: IColumn[]
   border?: boolean
 }) => {
-  return <>{columns.map((col, index) =>
-    col.children ? (
-      <RowRenderer key={col.id} border={border} row={row} columns={col.children} />
-    ) : (
-      <td
-        key={col.id}
-        className={border ? styles.colBorder : ''}
-        style={{
-          padding: '0.5rem',
-          width: '100px',
-          textAlign: 'left',
-          ...col.cellStyle,
-        }}
-      >
-        {col.format
-          ? col.format &&
-            col.format(searchValueInData(row, col.value ? col.value.split('.') : []), row, index)
-          : col.value && searchValueInData(row, col.value?.split('.'))}
-      </td>
-    ),
-  )}
-  </>
+  return (
+    <>
+      {columns.map((col, index) =>
+        col.children ? (
+          <RowRenderer key={col.id} border={border} row={row} columns={col.children} />
+        ) : (
+          <td
+            key={col.id}
+            className={border ? styles.colBorder : ''}
+            style={{
+              padding: '0.5rem',
+              width: '100px',
+              textAlign: 'left',
+              ...col.cellStyle,
+            }}
+          >
+            {col.format
+              ? col.format &&
+                col.format(
+                  searchValueInData(row, col.value ? col.value.split('.') : []),
+                  row,
+                  index,
+                )
+              : col.value && searchValueInData(row, col.value?.split('.'))}
+          </td>
+        ),
+      )}
+    </>
+  )
 }
