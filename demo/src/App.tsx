@@ -1,6 +1,6 @@
 import './App.css'
-import { Table } from '../../dist'
-import { IColumn } from '../../dist'
+import { Table } from '../node_modules/all-easy-packager'
+import { IColumn } from '../node_modules/all-easy-packager'
 
 function App() {
   const column: IColumn[] = [
