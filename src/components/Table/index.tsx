@@ -2,7 +2,10 @@ import '../../index.css'
 
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-
+export interface ITableFilter {
+  type?: 'dropdown' | 'input'
+  value?: string
+}
 import styles from './index.module.css'
 export interface IColumn {
   id?: string
@@ -12,6 +15,7 @@ export interface IColumn {
   children?: IColumn[]
   headStyle?: React.CSSProperties
   cellStyle?: React.CSSProperties
+  filter?: ITableFilter
 }
 export interface ITable {
   caption?: string
@@ -225,6 +229,71 @@ export const Table = ({
                           // className={styles.resizebaleDiv}
                         >
                           {childColumn.title}
+                        </div>
+                      </th>
+                    )
+                  })
+                ) : (
+                  <th
+                    className={border ? styles.colBorder : ''}
+                    style={{
+                      padding: '0.3rem 0.5rem',
+                      width: '100px',
+                      textAlign: 'left',
+                      ...column.headStyle,
+                    }}
+                    key={uuidv4()}
+                  ></th>
+                )
+              })}
+          </tr>
+          <tr>
+            {isExpandable && (
+              <th
+                className={border ? styles.colBorder : ''}
+                style={{
+                  padding: '0.5rem',
+                  width: '100px',
+                  textAlign: 'left',
+                  border: 'solid 1px #000000aaF',
+                }}
+              ></th>
+            )}
+            {showSerialNumber && (
+              <th
+                className={border ? styles.colBorder : ''}
+                style={{
+                  padding: '0.5rem',
+                  width: '100px',
+                  textAlign: 'left',
+                  border: 'solid 1px #000000aaF',
+                }}
+              ></th>
+            )}
+            {columns &&
+              columnState.map((column, index) => {
+                return column.children ? (
+                  column.children?.map((childColumn) => {
+                    return (
+                      <th
+                        className={border ? styles.colBorder : ''}
+                        style={{
+                          padding: '0.3rem 0.5rem',
+                          width: '100px',
+                          textAlign: 'left',
+                          border: 'solid 1px #eeeeeeaaF',
+                          ...childColumn.headStyle,
+                        }}
+                        key={uuidv4()}
+                      >
+                        <div
+                          style={{
+                            minWidth: '150px',
+                            ...column.headStyle,
+                          }}
+                          // className={styles.resizebaleDiv}
+                        >
+                          {childColumn.filter?.value}
                         </div>
                       </th>
                     )

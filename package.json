@@ -1,7 +1,7 @@
 {
   "name": "all-easy-packager",
   "private": false,
-  "version": "0.0.7",
+  "version": "0.0.9",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -26,13 +26,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/easy-packager.es.js",
-      "require": "./dist/easy-packager.umd.js"
-    },
-    "./dist/style.css": "./dist/style.css"
-  },
   "main": "./dist/easy-packager.umd.js",
   "module": "./dist/easy-packager.es.js",
   "types": "./dist/index.d.ts",
