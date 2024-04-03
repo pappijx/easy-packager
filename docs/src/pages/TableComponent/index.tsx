@@ -1,5 +1,5 @@
-import { Table } from '../../../../src/components'
-import { IColumn } from '../../../../src/components'
+import { Table } from '../../../../root/src/components'
+import { IColumn } from '../../../../root/src/components'
 
 function TableComponent() {
   const column: IColumn[] = [
