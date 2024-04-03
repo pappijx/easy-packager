@@ -1,12 +1,12 @@
-import { RecursiveComponentBuilder } from '../../../../root/src/components'
+import { RecursiveComponentBuilder } from 'all-easy-packager'
 import { CiCircleChevDown, CiCircleChevUp } from 'react-icons/ci'
 import { useState } from 'react'
-import { RecursiveComponentContext } from '../../../../root/src/components'
+import { RecursiveComponentContext } from 'all-easy-packager'
 
 import { MdDeleteForever } from 'react-icons/md'
 import { CiEdit } from 'react-icons/ci'
 import { IDataFolderStructure, dataFolderStructure, dataComment } from '../../data/dataRecursive'
-import { IRecursiveComponent } from '../../../../root/src/components/RecursiveComponentBuilder/RecursiveComponentBuilder'
+import { IRecursiveComponent } from 'all-easy-packager'
 
 const SampleComponent = ({
   data,

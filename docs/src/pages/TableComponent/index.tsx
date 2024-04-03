@@ -1,5 +1,5 @@
-import { Table } from '../../../../root/src/components'
-import { IColumn } from '../../../../root/src/components'
+import { Table } from 'all-easy-packager'
+import { IColumn } from 'all-easy-packager'
 
 function TableComponent() {
   const column: IColumn[] = [
