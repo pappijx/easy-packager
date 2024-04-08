@@ -26,6 +26,12 @@ yarn add all-easy-packager
 
 ## Usage
 
+## Recursive component builder
+
+```
+https://codesandbox.io/p/sandbox/recursive-c4s9vz?file=%2Fsrc%2FSampleCommentComponent.tsx%3A55%2C76
+```
+
 ```
 import './App.css'
 import { Table } from '../node_modules/all-easy-packager'
