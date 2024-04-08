@@ -13,6 +13,7 @@ export interface IRecursiveComponent<T> extends PropsWithChildren {
   deleteItem: IDeleteItem
   addItem: IAddItem
   updateItem: IUpdateNodeByPath
+  parent?: T
 }
 
 export const RecursiveComponentBuilder = ({
@@ -20,14 +21,18 @@ export const RecursiveComponentBuilder = ({
   component: Component,
   accessKey = '',
   result,
+  parent,
 }: any) => {
   const { recursiveData, deleteItem, addItem, updateNodeByPath } = useContext(RecursiveContext)
 
   const { children, ...otherkeys } = data || recursiveData
 
   useEffect(() => {
-    result(recursiveData)
+    {
+      result && result(recursiveData)
+    }
   }, [recursiveData])
+
   return (
     <>
       <Component
@@ -36,6 +41,7 @@ export const RecursiveComponentBuilder = ({
         deleteItem={() => deleteItem(accessKey)}
         addItem={addItem}
         updateItem={updateNodeByPath}
+        parent={parent}
       >
         {children && children.length > 0
           ? children.map((child: any, index: number) => {
@@ -47,6 +53,7 @@ export const RecursiveComponentBuilder = ({
                   accessKey={accessKeyChild}
                   result={result}
                   component={Component}
+                  parent={otherkeys}
                 />
               )
             })
