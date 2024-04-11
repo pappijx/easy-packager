@@ -3,7 +3,7 @@ import {
   IRecursiveComponent,
   RecursiveComponentBuilder,
   RecursiveComponentContext,
-} from '../../../../src/components'
+} from 'all-easy-packager'
 import { IRouteData } from '../../routes/routesData'
 import { BiChevronDown } from 'react-icons/bi'
 import { useState } from 'react'
