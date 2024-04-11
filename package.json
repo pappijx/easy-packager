@@ -1,7 +1,7 @@
 {
   "name": "all-easy-packager",
   "private": false,
-  "version": "0.0.13",
+  "version": "0.0.14",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -79,7 +79,7 @@
   "bugs": {
     "url": "https://github.com/pappijx/easy-packager/issues"
   },
-  "homepage": "https://github.com/pappijx/easy-packager#readme",
+  "homepage": "https://easy-packager.vercel.app",
   "license": "MIT",
-  "help": "help https://github.com/bigyanpoudel/react-vite-library"
+  "help": "help https://github.com/pappijx/easy-packager"
 }
