@@ -21,19 +21,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-          cache: 'yarn'
           registry-url: 'https://registry.npmjs.org/'
 
-      - run: yarn install --frozen-lockfile
+      - run: npm install --frozen-lockfile
       - name: Run Lint and Build
-        run: yarn run lint && yarn run build
+        run: npm run lint && npm run build
 
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
         with:
-          version: yarn version
-          publish: yarn publish
+          version: npm version
+          publish: npm publish
 
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
