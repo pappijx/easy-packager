@@ -42,7 +42,7 @@ jobs:
           node-version: '14' # Change this to your desired Node.js version
 
       - name: Login to npm
-        run: npm login --registry=https://registry.npmjs.org/ --scope=@your-scope --always-auth # Replace @your-scope with your npm scope
+        run: npm login --registry=https://registry.npmjs.org/ --scope=@pappijx--always-auth # Replace @your-scope with your npm scope
 
       - name: Publish Package
         run: npm publish --access public # Use "--access public" if your package is meant to be public, remove it otherwise
