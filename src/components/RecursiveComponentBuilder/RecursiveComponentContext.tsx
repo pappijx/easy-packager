@@ -2,6 +2,7 @@ import { createContext, Dispatch, PropsWithChildren, useState } from 'react'
 
 interface IRecursiveComponentContext extends PropsWithChildren {
   data: any
+  extraKeys?: any
 }
 
 export type IDeleteItem = (keyString: string) => void
@@ -14,6 +15,7 @@ interface IRecursiveContext {
   setRecursiveData: Dispatch<any>
   addItem: IAddItem
   updateNodeByPath: IUpdateNodeByPath
+  extraKeys?: any
 }
 
 export const RecursiveContext = createContext<IRecursiveContext>({
@@ -22,9 +24,14 @@ export const RecursiveContext = createContext<IRecursiveContext>({
   setRecursiveData: () => {},
   addItem: () => {},
   updateNodeByPath: () => {},
+  extraKeys: {},
 })
 
-export const RecursiveComponentContext = ({ children, data }: IRecursiveComponentContext) => {
+export const RecursiveComponentContext = ({
+  children,
+  data,
+  extraKeys,
+}: IRecursiveComponentContext) => {
   const [recursiveData, setRecursiveData] = useState(data)
 
   const deleteItem = (keyString: string) => {
@@ -117,6 +124,7 @@ export const RecursiveComponentContext = ({ children, data }: IRecursiveComponen
         setRecursiveData,
         addItem,
         updateNodeByPath,
+        extraKeys,
       }}
     >
       {children}

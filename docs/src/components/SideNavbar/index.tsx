@@ -1,77 +1,97 @@
-import { Link } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   IRecursiveComponent,
   RecursiveComponentBuilder,
   RecursiveComponentContext,
-} from 'all-easy-packager'
+} from '../../../../src/components'
 import { IRouteData } from '../../routes/routesData'
 import { BiChevronDown } from 'react-icons/bi'
 import { useState } from 'react'
+import { FaHamburger } from 'react-icons/fa'
 
-const SideNavComponent = ({ data, children, parent }: IRecursiveComponent<IRouteData>) => {
+interface IExtraKeys {
+  isOpen: boolean
+}
+
+const SideNavComponent = ({
+  data,
+  children,
+  extraKeys,
+}: IRecursiveComponent<IRouteData, IExtraKeys>) => {
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [show, setShow] = useState(false)
-
+  const { isOpen } = extraKeys
+  const selectedRoute =
+    pathname === data.path ||
+    (data.children?.length &&
+      data.path !== '' &&
+      data.children?.some((item) => item.path === pathname))
   return (
-    <div>
+    <>
       <div
         style={{
-          padding: '0.5rem',
           display: 'flex',
-          fontSize: '14px',
+          height: '40px',
+          textDecoration: 'none',
+          alignItems: 'center',
+          backgroundColor: selectedRoute ? 'red' : '',
         }}
+        onClick={children ? () => null : () => navigate(data.path)}
       >
-        {data.element && data.path && (
-          <Link
-            style={{
-              textDecoration: 'none',
-            }}
-            to={`../${parent?.path}/${data.path}`}
-          >
-            {data.label}
-          </Link>
-        )}
-
-        {!data.element && (
-          <div>
-            {data.label}{' '}
-            <BiChevronDown
-              style={{
-                rotate: show ? '180deg' : '',
-              }}
-              onClick={() => setShow((prev) => !prev)}
-            />
-          </div>
-        )}
-        {!data.path && <div>{data.label}</div>}
-      </div>
-
-      {(show || data.path === '') && (
+        <div style={{ padding: '0rem 1rem', display: 'grid', placeItems: 'center' }}>
+          {data.Icon}
+        </div>
         <div
           style={{
-            paddingLeft: data.path ? '0.5rem' : '',
+            transition: '0.3s',
+            width: isOpen ? '180px' : '0px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
-          {children}
+          {isOpen && data.label}
+          {children && data.path && (
+            <BiChevronDown
+              style={{ transition: '0.3s', rotate: show ? '' : '-180deg' }}
+              onClick={() => setShow((prev) => !prev)}
+            />
+          )}
         </div>
-      )}
-    </div>
+      </div>
+
+      {((show && isOpen) || data.path === '') && <div>{children}</div>}
+    </>
   )
 }
 
 const SideNavbar = ({ routes }: { routes: IRouteData }) => {
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
+        width: 'fit-content',
         backgroundColor: '#e5e5e5',
         height: '100%',
         borderRight: 'solid 1px #a7a7a7',
       }}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
     >
+      <FaHamburger
+        style={{
+          height: '40px',
+          padding: '1rem 1rem 0rem 1rem',
+        }}
+        onClick={() => setIsOpen((prev) => !prev)}
+      />
       <RecursiveComponentContext data={routes}>
-        <RecursiveComponentBuilder component={SideNavComponent} />
+        <RecursiveComponentBuilder extraKeys={{ isOpen }} component={SideNavComponent} />
       </RecursiveComponentContext>
     </div>
   )

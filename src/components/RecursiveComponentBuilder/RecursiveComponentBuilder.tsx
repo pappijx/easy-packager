@@ -7,13 +7,14 @@ import {
   RecursiveContext,
 } from './RecursiveComponentContext'
 
-export interface IRecursiveComponent<T> extends PropsWithChildren {
+export interface IRecursiveComponent<T, E> extends PropsWithChildren {
   data: T
   accessKey: string
   deleteItem: IDeleteItem
   addItem: IAddItem
   updateItem: IUpdateNodeByPath
   parent?: T
+  extraKeys: E
 }
 
 export const RecursiveComponentBuilder = ({
@@ -22,6 +23,7 @@ export const RecursiveComponentBuilder = ({
   accessKey = '',
   result,
   parent,
+  extraKeys,
 }: any) => {
   const { recursiveData, deleteItem, addItem, updateNodeByPath } = useContext(RecursiveContext)
 
@@ -36,12 +38,13 @@ export const RecursiveComponentBuilder = ({
   return (
     <>
       <Component
-        data={otherkeys}
+        data={{ children, ...otherkeys }}
         accessKey={accessKey}
         deleteItem={() => deleteItem(accessKey)}
         addItem={addItem}
         updateItem={updateNodeByPath}
         parent={parent}
+        extraKeys={extraKeys}
       >
         {children && children.length > 0
           ? children.map((child: any, index: number) => {
@@ -54,6 +57,7 @@ export const RecursiveComponentBuilder = ({
                   result={result}
                   component={Component}
                   parent={otherkeys}
+                  extraKeys={extraKeys}
                 />
               )
             })
