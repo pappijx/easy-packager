@@ -7,8 +7,9 @@ const MainLayout = ({ children }: PropsWithChildren) => {
     <div
       style={{
         display: 'flex',
-        gap: '1rem',
         height: '100vh',
+        width: '100vw',
+        overflow: 'hidden',
       }}
     >
       <div
@@ -22,7 +23,8 @@ const MainLayout = ({ children }: PropsWithChildren) => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '1rem',
+          width: '100%',
+          padding: '1rem',
         }}
       >
         {children}

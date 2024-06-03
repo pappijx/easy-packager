@@ -1,12 +1,34 @@
-import { Table } from 'all-easy-packager'
-import { IColumn } from 'all-easy-packager'
+import { useState } from 'react'
+import { InputSearchFilter, Table, IColumn } from '../../../../src/components'
 
 function TableComponent() {
+  const [filters, setFilters] = useState({
+    name: '',
+  })
+
+  const handleFilterChange = (value: string | number, key: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: value,
+    }))
+  }
+  console.log(filters)
+
   const column: IColumn[] = [
     {
       id: '1',
       title: 'Name',
       value: '',
+      filter: (
+        <InputSearchFilter
+          removeFilter={() => handleFilterChange('', 'name')}
+          value={filters.name}
+          style={{
+            width: '100%',
+          }}
+          onChange={(e) => handleFilterChange(e.target.value, 'name')}
+        />
+      ),
       children: [
         {
           id: '2',
@@ -127,10 +149,12 @@ function TableComponent() {
     <div
       style={{
         height: '70vh',
-        overflow: 'auto',
-        scrollbarWidth: 'none',
+        width: '90vw',
+        margin: 'auto',
+        marginTop: '0px',
       }}
     >
+      {filters.name}
       <Table
         columns={column}
         rowHeight="20px"

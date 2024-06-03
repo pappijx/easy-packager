@@ -1,5 +1,5 @@
 {
-  "name": "all-easy-packager",
+  "name": "wiz-ui",
   "private": false,
   "version": "0.0.14",
   "type": "module",
@@ -26,8 +26,8 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/easy-packager.umd.js",
-  "module": "./dist/easy-packager.es.js",
+  "main": "./dist/wiz-ui.umd.js",
+  "module": "./dist/wiz-ui.es.js",
   "types": "./dist/index.d.ts",
   "devDependencies": {
     "@types/css-modules": "^1.0.5",
@@ -61,8 +61,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "uuid": "^9.0.1"
+    "react-dom": "^18.2.0"
   },
   "repository": {
     "type": "git",

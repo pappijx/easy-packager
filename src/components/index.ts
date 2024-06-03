@@ -8,3 +8,4 @@ export type {
 export { RecursiveComponentContext } from './RecursiveComponentBuilder/RecursiveComponentContext'
 export type { IColumn, ITable } from './Table'
 export { Table } from './Table'
+export { InputSearchFilter } from './Table/TableFilter'

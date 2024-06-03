@@ -1,11 +1,7 @@
 import '../../index.css'
 
-import React, { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
-export interface ITableFilter {
-  type?: 'dropdown' | 'input'
-  value?: string
-}
+import React, { useEffect, useRef, useState } from 'react'
+
 import styles from './index.module.css'
 export interface IColumn {
   id?: string
@@ -15,7 +11,7 @@ export interface IColumn {
   children?: IColumn[]
   headStyle?: React.CSSProperties
   cellStyle?: React.CSSProperties
-  filter?: ITableFilter
+  filter?: React.ReactNode
 }
 export interface ITable {
   caption?: string
@@ -70,38 +66,42 @@ export const Table = ({
   expandedComponent,
 }: ITable) => {
   const [columnState, setColumnState] = useState<IColumn[]>(columns)
-  const [activeIndex, setActiveIndex] = useState<number>(0)
-  const [draggedOverElement, setDraggedOverElement] = useState<number>(0)
   const [expandedRowIndex, setExpandedRowIndex] = useState<number | null>(null)
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
 
-  const onDragStart = (e: React.DragEvent<HTMLTableHeaderCellElement>, index: number) => {
-    setActiveIndex(index)
+  const handleDragStart = (e: React.DragEvent<HTMLTableHeaderCellElement>, index: number) => {
+    setDraggedIndex(index)
   }
 
-  const onDragOver = (e: React.DragEvent<HTMLTableHeaderCellElement>, index: number) => {
+  const handleDragOver = (e: React.DragEvent<HTMLTableHeaderCellElement>, index: number) => {
     e.preventDefault()
-    setDraggedOverElement(index)
   }
 
-  const onDrop = (e: React.DragEvent<HTMLTableHeaderCellElement>) => {
+  const handleDrop = (e: React.DragEvent<HTMLTableHeaderCellElement>, index: number) => {
     e.preventDefault()
 
-    setColumnState((prev) => {
-      const finalArray: IColumn[] = [...prev]
-      finalArray[activeIndex] = prev[draggedOverElement]
-      finalArray[draggedOverElement] = prev[activeIndex]
-      return finalArray
-    })
+    if (draggedIndex !== null) {
+      setColumnState((prev) => {
+        const finalArray: IColumn[] = [...prev]
+        finalArray[index] = prev[draggedIndex]
+        finalArray[draggedIndex] = prev[index]
+        return finalArray
+      })
+    }
   }
 
   return (
     <div
       style={{
-        // border: 'solid 1px',
-        width: 'fit-content',
+        width: '100%',
+        overflow: 'auto',
         borderLeft: border ? '1px solid rgb(182, 182, 182)' : '',
         borderRight: border ? '1px solid rgb(182, 182, 182)' : '',
         paddingBottom: '0.1px',
+        scrollBehavior: 'smooth',
+      }}
+      onWheel={(e) => {
+        e.currentTarget.scrollLeft += e.deltaY > 0 ? 100 : -100
       }}
     >
       <table
@@ -151,34 +151,47 @@ export const Table = ({
                 S.No.
               </th>
             )}
-            {columns &&
+            {columnState &&
               columnState.map((column, index) => {
                 return (
-                  <th
-                    colSpan={column.children?.length}
-                    draggable={draggableCol}
-                    onDragStart={(e: any) => onDragStart(e, index)}
-                    onDragOver={(e: any) => onDragOver(e, index)}
-                    onDrop={(e: any) => onDrop(e)}
-                    style={{
-                      padding: '0.5rem',
-                      width: '100px',
-                      textAlign: 'left',
-                      borderTop: border ? '1px solid rgb(182, 182, 182)' : '',
-                    }}
-                    className={border ? styles.colBorder : ''}
-                    key={uuidv4()}
-                  >
-                    <div
+                  column && (
+                    <th
+                      colSpan={column?.children?.length}
+                      draggable={draggableCol}
+                      onDragStart={(e) => handleDragStart(e, index)}
+                      onDragOver={(e) => handleDragOver(e, index)}
+                      onDrop={(e) => handleDrop(e, index)}
                       style={{
-                        minWidth: column.children && column.children?.length * 150 + 'px',
-                        ...column.headStyle,
+                        padding: '0.5rem',
+                        width: '100px',
+                        textAlign: 'start',
+                        borderTop: border ? '1px solid rgb(182, 182, 182)' : '',
+                        verticalAlign: 'top',
                       }}
-                      className={styles.resizebaleDiv}
+                      className={border ? styles.colBorder : ''}
+                      key={`${index}-${index}`}
                     >
-                      {column.title}
-                    </div>
-                  </th>
+                      <div
+                        style={{
+                          minWidth: column?.children && column?.children?.length * 150 + 'px',
+                          ...column?.headStyle,
+                          position: 'relative',
+                        }}
+                        className={styles.resizebaleDiv}
+                      >
+                        <p>{column?.title}</p>
+                      </div>
+                      {column?.filter && (
+                        <div
+                          style={{
+                            width: '80%',
+                          }}
+                        >
+                          {column?.filter}
+                        </div>
+                      )}
+                    </th>
+                  )
                 )
               })}
           </tr>
@@ -205,10 +218,10 @@ export const Table = ({
                 }}
               ></th>
             )}
-            {columns &&
-              columnState.map((column, index) => {
-                return column.children ? (
-                  column.children?.map((childColumn) => {
+            {columnState &&
+              columnState.map((column, idx) => {
+                return column?.children ? (
+                  column?.children?.map((childColumn, index) => {
                     return (
                       <th
                         className={border ? styles.colBorder : ''}
@@ -217,19 +230,29 @@ export const Table = ({
                           width: '100px',
                           textAlign: 'left',
                           border: 'solid 1px #eeeeeeaaF',
-                          ...childColumn.headStyle,
+                          ...childColumn?.headStyle,
+                          verticalAlign: 'top',
                         }}
-                        key={uuidv4()}
+                        key={'2' + index}
                       >
                         <div
                           style={{
                             minWidth: '150px',
-                            ...column.headStyle,
+                            ...column?.headStyle,
                           }}
                           // className={styles.resizebaleDiv}
                         >
-                          {childColumn.title}
+                          {childColumn?.title}
                         </div>
+                        {column?.filter && (
+                          <div
+                            style={{
+                              width: '80%',
+                            }}
+                          >
+                            {column?.filter}
+                          </div>
+                        )}
                       </th>
                     )
                   })
@@ -240,9 +263,9 @@ export const Table = ({
                       padding: '0.3rem 0.5rem',
                       width: '100px',
                       textAlign: 'left',
-                      ...column.headStyle,
+                      ...column?.headStyle,
                     }}
-                    key={uuidv4()}
+                    key={'empty' + idx}
                   ></th>
                 )
               })}

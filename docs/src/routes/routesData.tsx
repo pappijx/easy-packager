@@ -1,11 +1,12 @@
 import React from 'react'
-import TableComponent from '../pages/TableComponent'
+// import TableComponent from '../pages/TableComponent'
 import { CommentSection, FileDirectory } from '../pages/RecursiveComponentCreator'
 import MainLayout from '../components/MainLayout.tsx'
 import { Outlet } from 'react-router-dom'
 import { HiHome } from 'react-icons/hi'
 import { BiRefresh } from 'react-icons/bi'
-import { FaTableCells } from 'react-icons/fa6'
+// import { FaTableCells } from 'react-icons/fa6'
+// import FormBuilder from '../pages/RecursiveComponentCreator/Formbuilder/index.tsx'
 
 export interface IRouteData {
   label: string
@@ -17,7 +18,7 @@ export interface IRouteData {
 
 export const routeData: IRouteData = {
   label: 'Home',
-  path: '',
+  path: '/',
   Icon: <HiHome />,
   element: (
     <MainLayout>
@@ -25,12 +26,12 @@ export const routeData: IRouteData = {
     </MainLayout>
   ),
   children: [
-    {
-      label: 'Table Component',
-      Icon: <FaTableCells />,
-      path: '/table',
-      element: <TableComponent />,
-    },
+    // {
+    //   label: 'Table Component',
+    //   Icon: <FaTableCells />,
+    //   path: '/table',
+    //   element: <TableComponent />,
+    // },
     {
       label: 'Recursive Component',
       path: 'recursive-builder',
@@ -46,6 +47,11 @@ export const routeData: IRouteData = {
           path: '/recursive-builder/file-directory-component',
           element: <FileDirectory />,
         },
+        // {
+        //   label: 'Form builder',
+        //   path: '/recursive-builder/form-builder',
+        //   element: <FormBuilder />,
+        // },
       ],
     },
   ],
