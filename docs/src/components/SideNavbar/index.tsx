@@ -1,9 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import {
-  IRecursiveComponent,
-  RecursiveComponentBuilder,
-  RecursiveComponentContext,
-} from '../../../../src/components'
+import { IRecursiveComponent, RecursiveComponentBuilder, RecursiveComponentContext } from 'wiz-ui'
 import { IRouteData } from '../../routes/routesData'
 import { BiChevronDown } from 'react-icons/bi'
 import { useState } from 'react'
