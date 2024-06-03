@@ -24,7 +24,7 @@ export default defineConfig((configEnv) => ({
       entry: resolve('src', 'components/index.ts'),
       name: 'ReactViteLibrary',
       formats: ['es', 'umd'],
-      fileName: (format) => `easy-packager.${format}.js`,
+      fileName: (format) => `wiz-ui.${format}.js`,
     },
     rollupOptions: {
       external: [...Object.keys(packageJson.peerDependencies)],

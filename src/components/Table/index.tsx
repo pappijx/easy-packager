@@ -100,7 +100,7 @@ export const Table = ({
         paddingBottom: '0.1px',
         scrollBehavior: 'smooth',
       }}
-      onWheel={(e) => {
+      onWheel={(e: React.WheelEvent<HTMLDivElement>) => {
         e.currentTarget.scrollLeft += e.deltaY > 0 ? 100 : -100
       }}
     >
@@ -158,9 +158,15 @@ export const Table = ({
                     <th
                       colSpan={column?.children?.length}
                       draggable={draggableCol}
-                      onDragStart={(e) => handleDragStart(e, index)}
-                      onDragOver={(e) => handleDragOver(e, index)}
-                      onDrop={(e) => handleDrop(e, index)}
+                      onDragStart={(e: React.DragEvent<HTMLTableHeaderCellElement>) =>
+                        handleDragStart(e, index)
+                      }
+                      onDragOver={(e: React.DragEvent<HTMLTableHeaderCellElement>) =>
+                        handleDragOver(e, index)
+                      }
+                      onDrop={(e: React.DragEvent<HTMLTableHeaderCellElement>) =>
+                        handleDrop(e, index)
+                      }
                       style={{
                         padding: '0.5rem',
                         width: '100px',
