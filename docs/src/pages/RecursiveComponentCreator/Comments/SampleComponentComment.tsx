@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FaChevronCircleDown } from 'react-icons/fa'
 import { BiSolidUpvote } from 'react-icons/bi'
 import { BiSolidDownvote } from 'react-icons/bi'
-import { IRecursiveComponent } from 'all-easy-packager'
+import { IRecursiveComponent } from 'wiz-ui'
 import { MdDelete } from 'react-icons/md'
 import { IDataFolderStructure } from '../../../data/dataRecursive'
 
@@ -13,7 +13,8 @@ const SampleComponentComment = ({
   deleteItem,
   addItem,
   updateItem,
-}: IRecursiveComponent<IDataFolderStructure>) => {
+}: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+IRecursiveComponent<IDataFolderStructure, any>) => {
   const [show, setShow] = useState(false)
   return (
     <div

@@ -1,5 +1,5 @@
 ---
-'all-easy-packager': patch
+'wiz-uir': patch
 ---
 
 new version

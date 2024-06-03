@@ -1,4 +1,4 @@
-# Easy Packager
+# Wiz UI
 
 Welcome to the React Easy Packager Component Library! This library provides a collection of reusable and customizable React components to help you build beautiful and efficient user interfaces for your web applications.
 
@@ -15,13 +15,13 @@ Welcome to the React Easy Packager Component Library! This library provides a co
 You can install the React Component Library via npm:
 
 ```
-npm i all-easy-packager
+npm i wiz-ui
 ```
 
 or
 
 ```
-yarn add all-easy-packager
+yarn add wiz-ui
 ```
 
 ## Demo

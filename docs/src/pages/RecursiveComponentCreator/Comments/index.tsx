@@ -1,5 +1,5 @@
-import { RecursiveComponentBuilder } from 'all-easy-packager'
-import { RecursiveComponentContext } from 'all-easy-packager'
+import { RecursiveComponentBuilder } from 'wiz-ui'
+import { RecursiveComponentContext } from 'wiz-ui'
 
 import { IDataFolderStructure, dataComment } from '../../../data/dataRecursive'
 import SampleComponentComment from './SampleComponentComment'

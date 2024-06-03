@@ -1,5 +1,5 @@
 ---
-'all-easy-packager': major
+'wiz-uir': major
 ---
 
 Workflow changes

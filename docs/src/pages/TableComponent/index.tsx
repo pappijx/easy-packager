@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { InputSearchFilter, Table, IColumn } from '../../../../src/components'
+import { InputSearchFilter, Table, IColumn } from 'wiz-ui'
 
 function TableComponent() {
   const [filters, setFilters] = useState({
